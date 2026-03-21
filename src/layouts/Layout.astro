@@ -1,0 +1,61 @@
+---
+import '@fontsource-variable/inter';
+import '@/styles/starwind.css';
+
+interface Props {
+	title: string;
+	description?: string;
+}
+
+const { title, description } = Astro.props;
+const lang = Astro.currentLocale ?? 'en';
+---
+
+<!doctype html>
+<html lang={lang}>
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		{description && <meta name="description" content={description} />}
+		<title>{title}</title>
+		<script is:inline>
+			const theme = (() => {
+				if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+					return localStorage.getItem('theme');
+				}
+				if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+					return 'dark';
+				}
+				return 'light';
+			})();
+			if (theme === 'dark') {
+				document.documentElement.classList.add('dark');
+			} else {
+				document.documentElement.classList.remove('dark');
+			}
+			window.localStorage.setItem('theme', theme);
+		</script>
+		<script is:inline>
+			(function () {
+				var supportedLocales = ['en', 'es'];
+				var defaultLocale = 'en';
+				if (window.location.pathname === '/' && !sessionStorage.getItem('locale-redirected')) {
+					var browserLangs = navigator.languages || [navigator.language];
+					var match = browserLangs
+						.map(function (l) { return l.split('-')[0].toLowerCase(); })
+						.find(function (code) { return supportedLocales.indexOf(code) !== -1 && code !== defaultLocale; });
+					if (match) {
+						sessionStorage.setItem('locale-redirected', 'true');
+						window.location.replace('/' + match + '/');
+					}
+				}
+			})();
+		</script>
+	</head>
+	<body class="min-h-screen">
+		<slot />
+	</body>
+</html>

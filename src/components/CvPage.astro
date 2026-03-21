@@ -1,0 +1,242 @@
+---
+import { Badge } from '@/components/starwind/badge';
+import {
+	Card,
+	CardContent,
+	CardDescription,
+	CardHeader,
+	CardTitle,
+} from '@/components/starwind/card';
+import { Separator } from '@/components/starwind/separator';
+import type { CvData } from '@/i18n/cv';
+import { type Locale, languages } from '@/i18n/ui';
+import { useTranslatedPath } from '@/i18n/utils';
+
+interface Props {
+	data: CvData;
+	lang: Locale;
+}
+
+const { data, lang } = Astro.props;
+---
+
+<div class="mx-auto max-w-5xl p-6 md:p-10 print:p-0">
+	{/* Dark mode toggle + Language switcher */}
+	<div class="mb-6 flex items-center justify-end gap-3 print:hidden">
+		{/* Language switcher */}
+		<div class="flex items-center gap-1 text-sm">
+			{Object.entries(languages).map(([code, label], i) => (
+				<>
+					{i > 0 && <span class="text-muted-foreground">|</span>}
+					{code === lang ? (
+						<span class="font-bold text-foreground">{code.toUpperCase()}</span>
+					) : (
+						<a
+							href={useTranslatedPath(code as Locale)('/')}
+							class="text-muted-foreground transition-colors hover:text-foreground"
+						>
+							{code.toUpperCase()}
+						</a>
+					)}
+				</>
+			))}
+		</div>
+
+		{/* Dark mode toggle */}
+		<button
+			id="theme-toggle"
+			class="rounded-lg border border-border bg-card p-2 text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+			aria-label={data.darkModeLabel}
+		>
+			<svg id="sun-icon" class="hidden size-5 dark:block" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+				<path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+				<path d="M8 12a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" />
+				<path d="M3 12h1m8 -9v1m8 8h1m-9 8v1m-6.4 -15.4l.7 .7m12.1 -.7l-.7 .7m0 11.4l.7 .7m-12.1 -.7l-.7 .7" />
+			</svg>
+			<svg id="moon-icon" class="block size-5 dark:hidden" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+				<path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+				<path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454l0 .008" />
+			</svg>
+		</button>
+	</div>
+
+	{/* Two-column layout */}
+	<div class="grid grid-cols-1 gap-8 md:grid-cols-[1fr_2fr]">
+
+		{/* ===== LEFT SIDEBAR ===== */}
+		<aside class="space-y-6">
+			{/* Header */}
+			<div>
+				<h1 class="font-heading text-3xl font-bold tracking-tight">LUKA CERRUTTI</h1>
+				<p class="text-lg text-primary-accent font-medium">{data.jobTitle}</p>
+			</div>
+
+			<Separator />
+
+			{/* About */}
+			<section>
+				<h2 class="mb-2 font-heading text-sm font-semibold uppercase tracking-wider text-muted-foreground">{data.sections.about}</h2>
+				<p class="text-sm leading-relaxed">
+					{data.about}
+				</p>
+			</section>
+
+			<Separator />
+
+			{/* Contact */}
+			<section>
+				<h2 class="mb-3 font-heading text-sm font-semibold uppercase tracking-wider text-muted-foreground">{data.sections.contact}</h2>
+				<ul class="space-y-2 text-sm">
+					<li class="flex items-center gap-2">
+						<svg class="size-4 shrink-0 text-muted-foreground" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" /><path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0" /></svg>
+						Buenos Aires, Argentina
+					</li>
+					<li class="flex items-center gap-2">
+						<svg class="size-4 shrink-0 text-muted-foreground" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2" /></svg>
+						<a href="https://wa.me/5491134411061" target="_blank" rel="noopener noreferrer" class="hover:text-primary-accent transition-colors">+54 9 11 3441-1061</a>
+					</li>
+					<li class="flex items-center gap-2">
+						<svg class="size-4 shrink-0 text-muted-foreground" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10" /><path d="M3 7l9 6l9 -6" /></svg>
+						<a href="mailto:lukacerrutti2002@gmail.com" class="hover:text-primary-accent transition-colors">lukacerrutti2002@gmail.com</a>
+					</li>
+					<li class="flex items-center gap-2">
+						<svg class="size-4 shrink-0 text-muted-foreground" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M8 11v5" /><path d="M8 8v.01" /><path d="M12 16v-5" /><path d="M16 16v-3a2 2 0 1 0 -4 0" /><path d="M3 7a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v10a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4l0 -10" /></svg>
+						<a href="https://linkedin.com/in/lce" target="_blank" rel="noopener noreferrer" class="hover:text-primary-accent transition-colors">linkedin.com/in/lce</a>
+					</li>
+					<li class="flex items-center gap-2">
+						<svg class="size-4 shrink-0 text-muted-foreground" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" /></svg>
+						<a href="https://github.com/lukacerr" target="_blank" rel="noopener noreferrer" class="hover:text-primary-accent transition-colors">github.com/lukacerr</a>
+					</li>
+				</ul>
+			</section>
+
+			<Separator />
+
+			{/* Languages */}
+			<section>
+				<h2 class="mb-3 font-heading text-sm font-semibold uppercase tracking-wider text-muted-foreground">{data.sections.languages}</h2>
+				<div class="space-y-2">
+					{data.languages.map((lang) => (
+						<div class="flex items-center justify-between text-sm">
+							<span>{lang.name}</span>
+							<Badge variant={lang.variant} size="sm">{lang.level}</Badge>
+						</div>
+					))}
+				</div>
+			</section>
+
+			<Separator />
+
+			{/* Soft Skills */}
+			<section>
+				<h2 class="mb-3 font-heading text-sm font-semibold uppercase tracking-wider text-muted-foreground">{data.sections.softSkills}</h2>
+				<ul class="space-y-1.5 text-sm">
+					{data.softSkills.map((skill) => (
+						<li class="flex items-center justify-between">
+							<span class="font-medium">{skill.label}</span>
+							<span class="text-muted-foreground">{skill.description}</span>
+						</li>
+					))}
+				</ul>
+				<p class="mt-3 text-xs text-muted-foreground leading-relaxed">
+					{data.softSkillsSummary}
+				</p>
+			</section>
+		</aside>
+
+		{/* ===== RIGHT MAIN CONTENT ===== */}
+		<main class="space-y-8">
+			{/* Experience */}
+			<section>
+				<div class="mb-4 flex items-center gap-2">
+					<svg class="size-5 text-primary-accent" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 9a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v9a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2l0 -9" /><path d="M8 7v-2a2 2 0 0 1 2 -2h4a2 2 0 0 1 2 2v2" /><path d="M12 12l0 .01" /><path d="M3 13a20 20 0 0 0 18 0" /></svg>
+					<h2 class="font-heading text-xl font-semibold">{data.sections.experience}</h2>
+				</div>
+				<div class="space-y-4">
+					{data.experience.map((job) => (
+						<Card size="sm">
+							<CardHeader>
+								<CardTitle>{job.company}</CardTitle>
+								<CardDescription>{job.role} | {job.period}</CardDescription>
+							</CardHeader>
+							<CardContent>
+								<ul class="list-disc pl-4 text-sm text-muted-foreground space-y-1">
+									{job.bullets.map((bullet) => (
+										<li>{bullet}</li>
+									))}
+								</ul>
+							</CardContent>
+						</Card>
+					))}
+				</div>
+			</section>
+
+			<Separator />
+
+			{/* Knowledge */}
+			<section>
+				<div class="mb-4 flex items-center gap-2">
+					<svg class="size-5 text-primary-accent" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 8l-4 4l4 4" /><path d="M17 8l4 4l-4 4" /><path d="M14 4l-4 16" /></svg>
+					<h2 class="font-heading text-xl font-semibold">{data.sections.knowledge}</h2>
+				</div>
+
+				<div class="space-y-4">
+					<div>
+						<h3 class="mb-2 text-sm font-medium text-muted-foreground">{data.knowledgeMain}</h3>
+						<div class="flex flex-wrap gap-2">
+							<Badge variant="primary" size="sm">Nest.js</Badge>
+							<Badge variant="primary" size="sm">React</Badge>
+							<Badge variant="primary" size="sm">Docker</Badge>
+							<Badge variant="primary" size="sm">Linux</Badge>
+							<Badge variant="primary" size="sm">SQL</Badge>
+							<Badge variant="primary" size="sm">LangChain</Badge>
+							<Badge variant="primary" size="sm">Cloud</Badge>
+							<Badge variant="primary" size="sm">Git</Badge>
+						</div>
+					</div>
+
+					<div>
+						<h3 class="mb-2 text-sm font-medium text-muted-foreground">{data.knowledgeAmong}</h3>
+						<div class="flex flex-wrap gap-2">
+							<Badge variant="outline" size="sm">Python (FastAPI, Seaborn)</Badge>
+							<Badge variant="outline" size="sm">Rust (Axum, Tauri, Tonic, CLI apps)</Badge>
+							<Badge variant="outline" size="sm">Shell scripting</Badge>
+							<Badge variant="outline" size="sm">React Native</Badge>
+							<Badge variant="outline" size="sm">gRPC services</Badge>
+							<Badge variant="outline" size="sm">Next.js</Badge>
+							<Badge variant="outline" size="sm">Zustand</Badge>
+							<Badge variant="outline" size="sm">shadcn</Badge>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<Separator />
+
+			{/* Education */}
+			<section>
+				<div class="mb-4 flex items-center gap-2">
+					<svg class="size-5 text-primary-accent" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M22 9l-10 -4l-10 4l10 4l10 -4v6" /><path d="M6 10.6v5.4a6 3 0 0 0 12 0v-5.4" /></svg>
+					<h2 class="font-heading text-xl font-semibold">{data.sections.education}</h2>
+				</div>
+				<div class="space-y-4">
+					{data.education.map((edu) => (
+						<Card size="sm">
+							<CardHeader>
+								<CardTitle>{edu.institution}</CardTitle>
+								<CardDescription>{edu.description} | {edu.period}</CardDescription>
+							</CardHeader>
+						</Card>
+					))}
+				</div>
+			</section>
+		</main>
+	</div>
+</div>
+
+<script>
+	document.getElementById('theme-toggle')?.addEventListener('click', () => {
+		const isDark = document.documentElement.classList.toggle('dark');
+		localStorage.setItem('theme', isDark ? 'dark' : 'light');
+	});
+</script>
