@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://luka.software/sitemap-index.xml
+Sitemap: https://luka.nexata.app/sitemap-index.xml

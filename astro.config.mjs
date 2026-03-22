@@ -5,7 +5,7 @@ import { defineConfig } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://luka.software',
+	site: 'https://luka.nexata.app',
 	trailingSlash: 'always',
 	i18n: {
 		locales: ['en', 'es'],

@@ -124,7 +124,7 @@ og-template.html               # OG image HTML template (1200x630, used by gener
 ## SEO
 
 ### Site Configuration
-- **Production URL**: `https://luka.software` (set as `site` in `astro.config.mjs`)
+- **Production URL**: `https://luka.nexata.app` (set as `site` in `astro.config.mjs`)
 - **Trailing slashes**: `trailingSlash: 'always'` — prevents duplicate content from inconsistent URLs
 
 ### Sitemap
@@ -134,7 +134,7 @@ og-template.html               # OG image HTML template (1200x630, used by gener
 ### robots.txt
 - Static file at `public/robots.txt`
 - Allows all crawlers (`User-agent: * / Allow: /`)
-- Points to sitemap at `https://luka.software/sitemap-index.xml`
+- Points to sitemap at `https://luka.nexata.app/sitemap-index.xml`
 
 ### Meta Tags (in `Layout.astro`)
 - **Canonical URL**: `<link rel="canonical">` — derived from `Astro.url.pathname` + site base
