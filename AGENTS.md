@@ -20,6 +20,7 @@
 | Tabler Icons | ^3.40.0 | SVG icon set (outline style, inlined manually) |
 | Biome | 2.4.8 | Linter and formatter |
 | Playwright | ^1.58.2 | OG image generation (dev dependency) |
+| astro-pdf | ^1.8.0 | Build-time PDF generation from site pages (uses Puppeteer) |
 | Bun | >=1.x | Package manager and runtime |
 | Node | >=22.12.0 | Minimum runtime version |
 
@@ -49,14 +50,14 @@ src/
 └── styles/
     └── starwind.css           # Tailwind v4 config + Starwind design tokens (light/dark themes)
 
-scripts/
-└── generate-og.ts             # Playwright script: generates public/og.png from og-template.html
+integrations/
+└── og-image.ts                # Custom Astro integration: generates og.png at build time via Playwright
 
-public/                        # Static assets (favicons, PDFs, og.png, robots.txt)
+public/                        # Static assets (favicons, robots.txt)
 starwind.config.json           # Starwind CLI configuration
 biome.json                     # Biome linter/formatter config
-astro.config.mjs               # Astro + Tailwind Vite plugin + i18n config
-og-template.html               # OG image HTML template (1200x630, used by generate-og.ts)
+astro.config.mjs               # Astro + Tailwind Vite plugin + i18n config + PDF + OG image generation
+og-template.html               # OG image HTML template (1200x630, used by og-image integration)
 ```
 
 ## Commands
@@ -64,10 +65,9 @@ og-template.html               # OG image HTML template (1200x630, used by gener
 | Command | Purpose |
 |---|---|
 | `bun run dev` | Start dev server |
-| `bun run build` | Build static site to `dist/` |
+| `bun run build` | Build static site to `dist/` (includes auto-generated PDFs and OG image) |
 | `bun run preview` | Preview production build |
 | `bun run check` | Run Biome lint + format (auto-fixes with `--fix --unsafe`) |
-| `bun run og` | Generate `public/og.png` from `og-template.html` via Playwright |
 
 ## Code Conventions
 
@@ -161,9 +161,30 @@ og-template.html               # OG image HTML template (1200x630, used by gener
 - Linked from toolbar via chatbot icon button
 
 ### OG Image Generation
-- **Automated via Playwright**: Run `bun run og` to generate `public/og.png` (1200x630)
-- Script at `scripts/generate-og.ts` launches headless Chromium, loads `og-template.html`, screenshots at 1200x630
+- **Automated at build time**: Custom Astro integration (`integrations/og-image.ts`) generates `og.png` (1200x630) during `astro build`
+- Uses Playwright to launch headless Chromium, load `og-template.html`, and screenshot at 1200x630
+- Output goes directly to `dist/og.png` — **no static `og.png` in `public/`**
+- Runs in the `astro:build:done` hook, after all pages and PDFs are generated
 - Template at `og-template.html` uses the Vivid Lilac color scheme — update it if design tokens change
+
+### PDF Generation (astro-pdf)
+- **Automated at build time**: `astro-pdf` integration generates 4 PDF variants during `astro build`:
+  - `/cv-en.pdf` (English, light theme)
+  - `/cv-en-dark.pdf` (English, dark theme)
+  - `/cv-es.pdf` (Spanish, light theme)
+  - `/cv-es-dark.pdf` (Spanish, dark theme)
+- Uses Puppeteer under the hood to launch a preview server and render the actual built pages to PDF
+- PDFs are output directly into `dist/` — **no static PDFs in `public/`**
+- Configured in `astro.config.mjs` with shared `basePdfPageOptions` and separate `lightPdfCallback`/`darkPdfCallback`
+- Uses array syntax per page to generate both light and dark variants from the same URL
+- **Key settings:**
+  - `screen: true` — uses screen media type (not print) to preserve all visual styles (colors, backgrounds, card borders)
+  - `viewport: { width: 1280 }` — triggers the `md:` two-column desktop layout
+  - `format: 'A4'` + `scale: 0.8` — fits the full CV on a single A4 page
+  - `printBackground: true` — preserves background colors and images
+- **Callbacks**: Shared `preparePdfPage()` helper removes `print:hidden` toolbar elements and ensures all animated sections are visible. `lightPdfCallback` removes the `dark` class; `darkPdfCallback` adds the `dark` class.
+- **Dynamic PDF link**: The PDF download button in `CvPage.astro` (`id="pdf-link"`) has a client-side script that updates the `href` based on the current theme. Uses a `MutationObserver` on `<html>` class changes to react to theme toggles. Default href is the light variant (works without JS). Also handles Astro view transitions via `astro:after-swap`.
+- **Tuning:** If CV content grows and overflows to 2 pages, decrease the `scale` value in `astro.config.mjs` (current: `0.8`). If the PDF looks too zoomed out, increase it.
 
 ### View Transitions
 - `Layout.astro` imports and renders `<ClientRouter />` from `astro:transitions`

@@ -1,3 +1,10 @@
+import type { ImageMetadata } from 'astro';
+import eyLogo from '@/assets/logos/ey.png';
+import hyprfollowLogo from '@/assets/logos/hyprfollow.png';
+import losa0Logo from '@/assets/logos/losa0.svg';
+import nexataLogo from '@/assets/logos/nexata.png';
+import unaplausoLogo from '@/assets/logos/unaplauso.svg';
+import wirsolutLogo from '@/assets/logos/wirsolut.svg';
 import type { Locale } from './ui';
 
 export interface ExperienceEntry {
@@ -7,14 +14,16 @@ export interface ExperienceEntry {
 	period: string;
 	bullets: string[];
 	current?: boolean;
-	logo?: string;
+	logo?: ImageMetadata;
 }
 
 export interface EducationEntry {
 	institution: string;
 	description: string;
 	period: string;
-	logo?: string;
+	url?: string;
+	icon?: 'university' | 'school';
+	logo?: ImageMetadata;
 }
 
 export interface LanguageEntry {
@@ -33,7 +42,7 @@ export interface ProjectEntry {
 	name: string;
 	description: string;
 	url: string;
-	logo?: string;
+	logo?: ImageMetadata;
 }
 
 export interface CvData {
@@ -128,6 +137,7 @@ export const cvData: Record<Locale, CvData> = {
 			{
 				company: 'Ernst & Young (EY)',
 				url: 'https://www.ey.com',
+				logo: eyLogo,
 				role: 'AI Engineer',
 				period: 'Jul 2025 \u2013 Present',
 				current: true,
@@ -137,6 +147,7 @@ export const cvData: Record<Locale, CvData> = {
 			},
 			{
 				company: 'Un Aplauso',
+				logo: unaplausoLogo,
 				role: 'Back & Infra Lead',
 				period: 'Jul 2024 \u2013 Jul 2025',
 				bullets: [
@@ -146,6 +157,7 @@ export const cvData: Record<Locale, CvData> = {
 			{
 				company: 'Losa0',
 				url: 'https://losa0.com',
+				logo: losa0Logo,
 				role: 'Full-Stack Developer',
 				period: 'Jul 2023 \u2013 Jul 2025',
 				bullets: [
@@ -155,6 +167,7 @@ export const cvData: Record<Locale, CvData> = {
 			{
 				company: 'Wirsolut S.A.',
 				url: 'https://wirsolut.com',
+				logo: wirsolutLogo,
 				role: 'Full-Stack Developer',
 				period: 'Apr 2021 \u2013 Jul 2023',
 				bullets: [
@@ -167,11 +180,15 @@ export const cvData: Record<Locale, CvData> = {
 				institution: 'UADE',
 				description: 'Software Engineering',
 				period: 'Mar 2021 \u2013 Present',
+				url: 'https://www.uade.edu.ar',
+				icon: 'university',
 			},
 			{
 				institution: 'ORT Argentina',
 				description: 'HS Diploma, Computer Science',
 				period: 'Mar 2015 \u2013 Dec 2020',
+				url: 'https://www.ort.edu.ar',
+				icon: 'school',
 			},
 		],
 		projects: [
@@ -180,13 +197,14 @@ export const cvData: Record<Locale, CvData> = {
 				description:
 					'AI-powered enterprise knowledge platform. Unifies all your work tools into a single semantic search.',
 				url: 'https://nexata.app/home',
-				logo: '/nexata-logo.png',
+				logo: nexataLogo,
 			},
 			{
 				name: 'HyprFollow',
 				description:
 					'JSON-based event monitors for Hyprland activity. Built with Rust via hyprland-rs IPC bindings.',
 				url: 'https://github.com/lukacerr/hyprfollow',
+				logo: hyprfollowLogo,
 			},
 		],
 	},
@@ -252,6 +270,7 @@ export const cvData: Record<Locale, CvData> = {
 			{
 				company: 'Ernst & Young (EY)',
 				url: 'https://www.ey.com',
+				logo: eyLogo,
 				role: 'Ingeniero de IA',
 				period: 'Jul 2025 \u2013 Actualidad',
 				current: true,
@@ -261,6 +280,7 @@ export const cvData: Record<Locale, CvData> = {
 			},
 			{
 				company: 'Un Aplauso',
+				logo: unaplausoLogo,
 				role: 'Líder de Back e Infra',
 				period: 'Jul 2024 \u2013 Jul 2025',
 				bullets: [
@@ -270,6 +290,7 @@ export const cvData: Record<Locale, CvData> = {
 			{
 				company: 'Losa0',
 				url: 'https://losa0.com',
+				logo: losa0Logo,
 				role: 'Desarrollador Full-Stack',
 				period: 'Jul 2023 \u2013 Jul 2025',
 				bullets: [
@@ -279,6 +300,7 @@ export const cvData: Record<Locale, CvData> = {
 			{
 				company: 'Wirsolut S.A.',
 				url: 'https://wirsolut.com',
+				logo: wirsolutLogo,
 				role: 'Desarrollador Full-Stack',
 				period: 'Abr 2021 \u2013 Jul 2023',
 				bullets: [
@@ -291,11 +313,15 @@ export const cvData: Record<Locale, CvData> = {
 				institution: 'UADE',
 				description: 'Ingeniería en Informática',
 				period: 'Mar 2021 \u2013 Actualidad',
+				url: 'https://www.uade.edu.ar',
+				icon: 'university',
 			},
 			{
 				institution: 'ORT Argentina',
 				description: 'Bachiller en Inform\u00e1tica',
 				period: 'Mar 2015 \u2013 Dic 2020',
+				url: 'https://www.ort.edu.ar',
+				icon: 'school',
 			},
 		],
 		projects: [
@@ -304,13 +330,14 @@ export const cvData: Record<Locale, CvData> = {
 				description:
 					'Plataforma de conocimiento empresarial con IA. Unifica todas tus herramientas de trabajo en un \u00fanico buscador sem\u00e1ntico.',
 				url: 'https://nexata.app/home',
-				logo: '/nexata-logo.png',
+				logo: nexataLogo,
 			},
 			{
 				name: 'HyprFollow',
 				description:
 					'Monitores de eventos JSON para la actividad de Hyprland. Construido en Rust con bindings IPC de hyprland-rs.',
 				url: 'https://github.com/lukacerr/hyprfollow',
+				logo: hyprfollowLogo,
 			},
 		],
 	},
