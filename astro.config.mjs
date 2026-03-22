@@ -15,6 +15,10 @@ const preparePdfPage = async (page) => {
 		document.querySelectorAll('[class*="print:hidden"]').forEach((el) => {
 			el.remove();
 		});
+		// Remove emoji flags (headless Chromium lacks emoji fonts)
+		document.querySelectorAll('.lang-flag').forEach((el) => {
+			el.remove();
+		});
 		// Ensure all animated sections are visible
 		document.querySelectorAll('[class*="opacity-0"]').forEach((el) => {
 			el.classList.remove(
