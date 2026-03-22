@@ -1,7 +1,7 @@
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import type { AstroIntegration } from 'astro';
-import { chromium } from 'playwright';
+import puppeteer from 'puppeteer';
 
 export default function ogImage(): AstroIntegration {
 	return {
@@ -16,11 +16,11 @@ export default function ogImage(): AstroIntegration {
 				);
 				const outputPath = resolve(fileURLToPath(dir), 'og.png');
 
-				const browser = await chromium.launch();
+				const browser = await puppeteer.launch();
 				const page = await browser.newPage();
-				await page.setViewportSize({ width: 1200, height: 630 });
+				await page.setViewport({ width: 1200, height: 630 });
 				await page.goto(`file://${templatePath}`, {
-					waitUntil: 'networkidle',
+					waitUntil: 'networkidle0',
 				});
 				await page.screenshot({ path: outputPath });
 				await browser.close();
