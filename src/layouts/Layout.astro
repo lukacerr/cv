@@ -1,6 +1,9 @@
 ---
 import '@fontsource-variable/inter';
 import '@/styles/starwind.css';
+import { ClientRouter } from 'astro:transitions';
+import { cvData } from '@/i18n/cv';
+import { defaultLang, locales } from '@/i18n/ui';
 
 interface Props {
 	title: string;
@@ -9,35 +12,141 @@ interface Props {
 
 const { title, description } = Astro.props;
 const lang = Astro.currentLocale ?? 'en';
+
+// SEO: Canonical URL
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+
+// SEO: hreflang alternate URLs
+const hreflangUrls = locales.map((locale) => {
+	const path = locale === defaultLang ? '/' : `/${locale}/`;
+	return { locale, url: new URL(path, Astro.site).href };
+});
+
+// SEO: OG locale format (en -> en_US, es -> es_AR)
+const ogLocaleMap: Record<string, string> = { en: 'en_US', es: 'es_AR' };
+const ogLocale = ogLocaleMap[lang] ?? 'en_US';
+const ogLocaleAlternates = locales
+	.filter((l) => l !== lang)
+	.map((l) => ogLocaleMap[l] ?? l);
+
+// SEO: JSON-LD Person structured data (always English, same source as CV)
+const en = cvData.en;
+const jsonLd = {
+	'@context': 'https://schema.org',
+	'@type': 'Person',
+	name: 'Luka Cerrutti',
+	url: Astro.site?.href,
+	jobTitle: en.jobTitle,
+	description: en.about,
+	address: {
+		'@type': 'PostalAddress',
+		addressLocality: 'Buenos Aires',
+		addressCountry: 'AR',
+	},
+	sameAs: ['https://linkedin.com/in/lce', 'https://github.com/lukacerr'],
+	worksFor: {
+		'@type': 'Organization',
+		name: en.experience[0].company,
+	},
+	alumniOf: en.education.map((edu) => ({
+		'@type': 'EducationalOrganization',
+		name: edu.institution,
+	})),
+	knowsLanguage: ['es', 'en', 'ja', 'pt'],
+	knowsAbout: [
+		'Nest.js',
+		'React',
+		'Docker',
+		'Linux',
+		'SQL',
+		'LangChain',
+		'Cloud',
+		'Git',
+		'Python',
+		'Rust',
+	],
+};
 ---
 
 <!doctype html>
 <html lang={lang}>
 	<head>
 		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		{description && <meta name="description" content={description} />}
+
 		<title>{title}</title>
+		{description && <meta name="description" content={description} />}
+
+		{/* Favicons */}
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+
+		{/* SEO: Canonical + hreflang */}
+		<link rel="canonical" href={canonicalUrl.href} />
+		{hreflangUrls.map(({ locale, url }) => (
+			<link rel="alternate" hreflang={locale} href={url} />
+		))}
+		<link rel="alternate" hreflang="x-default" href={hreflangUrls.find((h) => h.locale === defaultLang)!.url} />
+
+		{/* SEO: Sitemap */}
+		<link rel="sitemap" href="/sitemap-index.xml" />
+
+		{/* SEO: Open Graph */}
+		<meta property="og:title" content={title} />
+		{description && <meta property="og:description" content={description} />}
+		<meta property="og:url" content={canonicalUrl.href} />
+		<meta property="og:type" content="website" />
+		<meta property="og:locale" content={ogLocale} />
+		{ogLocaleAlternates.map((alt) => (
+			<meta property="og:locale:alternate" content={alt} />
+		))}
+		<meta property="og:image" content={new URL('/og.png', Astro.site).href} />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+
+		{/* SEO: Twitter Card */}
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		{description && <meta name="twitter:description" content={description} />}
+		<meta name="twitter:image" content={new URL('/og.png', Astro.site).href} />
+
+		{/* SEO: Theme color (light/dark) */}
+		<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+		<meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)" />
+
+		{/* SEO: JSON-LD Person structured data */}
+		<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+		{/* View transitions (SPA-style navigation) */}
+		<ClientRouter />
+
+		{/* Dark mode init — Starwind convention, prevents flash + supports view transitions */}
 		<script is:inline>
-			const theme = (() => {
-				if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
-					return localStorage.getItem('theme');
+			function initTheme() {
+				var colorTheme = localStorage.getItem('colorTheme');
+				if (!colorTheme) {
+					if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+						document.documentElement.classList.add('dark');
+						localStorage.setItem('colorTheme', 'dark');
+					} else {
+						document.documentElement.classList.remove('dark');
+						localStorage.setItem('colorTheme', 'light');
+					}
+				} else if (colorTheme === 'dark') {
+					document.documentElement.classList.add('dark');
+				} else if (colorTheme === 'light') {
+					document.documentElement.classList.remove('dark');
+				} else if (colorTheme === 'system') {
+					var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+					document.documentElement.classList.toggle('dark', prefersDark);
 				}
-				if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-					return 'dark';
-				}
-				return 'light';
-			})();
-			if (theme === 'dark') {
-				document.documentElement.classList.add('dark');
-			} else {
-				document.documentElement.classList.remove('dark');
 			}
-			window.localStorage.setItem('theme', theme);
+			initTheme();
+			document.addEventListener('astro:after-swap', initTheme);
 		</script>
+
+		{/* Browser language detection (client-side, scalable) */}
 		<script is:inline>
 			(function () {
 				var supportedLocales = ['en', 'es'];
@@ -57,5 +166,14 @@ const lang = Astro.currentLocale ?? 'en';
 	</head>
 	<body class="min-h-screen">
 		<slot />
+
+		{/* Intersection Observer for scroll animations (tailwindcss-intersect) */}
+		<script>
+			import { Observer } from 'tailwindcss-intersect';
+			Observer.start();
+			document.addEventListener('astro:page-load', () => {
+				Observer.restart();
+			});
+		</script>
 	</body>
 </html>

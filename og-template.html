@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>OG Image Template — Screenshot at 1200x630</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+	* { margin: 0; padding: 0; box-sizing: border-box; }
+	body {
+		width: 1200px;
+		height: 630px;
+		font-family: 'Inter', system-ui, sans-serif;
+		background: #0a0a0a;
+		color: #fafafa;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		overflow: hidden;
+	}
+	.card {
+		width: 1120px;
+		height: 550px;
+		background: #171717;
+		border: 1px solid #262626;
+		border-radius: 24px;
+		padding: 64px 72px;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+	}
+	.top {
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+	}
+	.name {
+		font-size: 64px;
+		font-weight: 800;
+		letter-spacing: -0.02em;
+		line-height: 1;
+	}
+	.role {
+		font-size: 32px;
+		font-weight: 600;
+		color: #c47fd5; /* vivid lilac = primary */
+	}
+	.description {
+		font-size: 20px;
+		color: #a3a3a3; /* neutral-400 = muted-foreground dark */
+		line-height: 1.5;
+		max-width: 800px;
+		margin-top: 8px;
+	}
+	.bottom {
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-end;
+	}
+	.badges {
+		display: flex;
+		gap: 10px;
+		flex-wrap: wrap;
+		max-width: 700px;
+	}
+	.badge {
+		font-size: 14px;
+		font-weight: 500;
+		padding: 6px 14px;
+		border-radius: 999px;
+		background: #3d2045;
+		color: #d9a8e6;
+		border: 1px solid #c47fd5;
+	}
+	.url {
+		font-size: 18px;
+		font-weight: 500;
+		color: #737373;
+		display: flex;
+		align-items: center;
+		gap: 8px;
+	}
+	.url svg {
+		width: 20px;
+		height: 20px;
+		stroke: #737373;
+	}
+</style>
+</head>
+<body>
+<div class="card">
+	<div class="top">
+		<div class="name">Luka Cerrutti</div>
+		<div class="role">Software Engineer</div>
+		<div class="description">
+			Computer science engineering student with full-stack development experience.
+			Passionate about robust and scalable software.
+		</div>
+	</div>
+	<div class="bottom">
+		<div class="badges">
+			<span class="badge">Nest.js</span>
+			<span class="badge">React</span>
+			<span class="badge">Docker</span>
+			<span class="badge">Linux</span>
+			<span class="badge">SQL</span>
+			<span class="badge">LangChain</span>
+			<span class="badge">Python</span>
+			<span class="badge">Rust</span>
+			<span class="badge">Cloud</span>
+			<span class="badge">Git</span>
+		</div>
+		<div class="url">
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Link"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+			luka.software
+		</div>
+	</div>
+</div>
+</body>
+</html>

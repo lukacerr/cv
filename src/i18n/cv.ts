@@ -2,26 +2,38 @@ import type { Locale } from './ui';
 
 export interface ExperienceEntry {
 	company: string;
+	url?: string;
 	role: string;
 	period: string;
 	bullets: string[];
+	current?: boolean;
+	logo?: string;
 }
 
 export interface EducationEntry {
 	institution: string;
 	description: string;
 	period: string;
+	logo?: string;
 }
 
 export interface LanguageEntry {
 	name: string;
 	level: string;
-	variant: 'primary' | 'outline';
+	flag: string;
+	proficiency: number;
 }
 
 export interface SoftSkillEntry {
 	label: string;
 	description: string;
+}
+
+export interface ProjectEntry {
+	name: string;
+	description: string;
+	url: string;
+	logo?: string;
 }
 
 export interface CvData {
@@ -36,16 +48,21 @@ export interface CvData {
 		experience: string;
 		education: string;
 		knowledge: string;
+		projects: string;
 	};
 	about: string;
 	softSkillsSummary: string;
 	knowledgeMain: string;
 	knowledgeAmong: string;
 	darkModeLabel: string;
+	pdfLabel: string;
+	repoLabel: string;
+	meetLabel: string;
 	languages: LanguageEntry[];
 	softSkills: SoftSkillEntry[];
 	experience: ExperienceEntry[];
 	education: EducationEntry[];
+	projects: ProjectEntry[];
 }
 
 export const cvData: Record<Locale, CvData> = {
@@ -61,6 +78,7 @@ export const cvData: Record<Locale, CvData> = {
 			experience: 'Experience',
 			education: 'Education',
 			knowledge: 'Knowledge',
+			projects: 'Projects',
 		},
 		about:
 			'Computer science engineering student with full-stack development experience. Passionate about robust and scalable software, "best-practices" enthusiast. Artix Linux user for daily usage and work.',
@@ -69,11 +87,34 @@ export const cvData: Record<Locale, CvData> = {
 		knowledgeMain: 'Main',
 		knowledgeAmong: 'Among',
 		darkModeLabel: 'Toggle dark mode',
+		pdfLabel: 'Download PDF',
+		repoLabel: 'Source code',
+		meetLabel: 'Schedule a meeting',
 		languages: [
-			{ name: 'Spanish', level: 'Native', variant: 'primary' },
-			{ name: 'English', level: 'C1', variant: 'outline' },
-			{ name: 'Japanese', level: 'N4', variant: 'outline' },
-			{ name: 'Portuguese', level: 'A1', variant: 'outline' },
+			{
+				name: 'Spanish',
+				level: 'Native',
+				flag: '\u{1F1E6}\u{1F1F7}',
+				proficiency: 100,
+			},
+			{
+				name: 'English',
+				level: 'C1',
+				flag: '\u{1F1FA}\u{1F1F8}',
+				proficiency: 80,
+			},
+			{
+				name: 'Japanese',
+				level: 'N4',
+				flag: '\u{1F1EF}\u{1F1F5}',
+				proficiency: 40,
+			},
+			{
+				name: 'Portuguese',
+				level: 'A1',
+				flag: '\u{1F1E7}\u{1F1F7}',
+				proficiency: 20,
+			},
 		],
 		softSkills: [
 			{ label: 'Thinking', description: 'Critical, solutions' },
@@ -86,34 +127,38 @@ export const cvData: Record<Locale, CvData> = {
 		experience: [
 			{
 				company: 'Ernst & Young (EY)',
+				url: 'https://www.ey.com',
 				role: 'AI Engineer',
-				period: 'July 2025 \u2013 Present',
+				period: 'Jul 2025 \u2013 Present',
+				current: true,
 				bullets: [
-					'Agentic AI in Python. Orchestration with FastAPI and Pydantic. Excel manipulation with Pandas, infrastructure on Azure and Blob Storage.',
+					'Agentic AI in `Python`. Orchestration with `FastAPI` and `Pydantic`. Excel manipulation with `Pandas`, infrastructure on `Azure` and `Blob Storage`.',
 				],
 			},
 			{
 				company: 'Un Aplauso',
-				role: 'CTO, Back & Infra Lead',
-				period: 'July 2024 \u2013 July 2025',
+				role: 'Back & Infra Lead',
+				period: 'Jul 2024 \u2013 Jul 2025',
 				bullets: [
-					'Microservices in Nest.js monorepo, using Redis. PostgreSQL database with DrizzleORM. AWS infrastructure with AuroraDB and EC2 SUSE.',
+					'Microservices in `Nest.js` monorepo, using `Redis`. `PostgreSQL` database with `DrizzleORM`. `AWS` infrastructure with `AuroraDB` and `EC2` SUSE.',
 				],
 			},
 			{
 				company: 'Losa0',
+				url: 'https://losa0.com',
 				role: 'Full-Stack Developer',
-				period: 'July 2023 \u2013 July 2025',
+				period: 'Jul 2023 \u2013 Jul 2025',
 				bullets: [
-					'Development with Nest.js, using TypeORM and PostgreSQL. Upkeeping EC2 & infrastructure with Ubuntu in AWS. Front-end web React.',
+					'Development with `Nest.js`, using `TypeORM` and `PostgreSQL`. Upkeeping `EC2` & infrastructure with `Ubuntu` in `AWS`. Front-end web `React`.',
 				],
 			},
 			{
 				company: 'Wirsolut S.A.',
+				url: 'https://wirsolut.com',
 				role: 'Full-Stack Developer',
-				period: 'April 2021 \u2013 July 2023',
+				period: 'Apr 2021 \u2013 Jul 2023',
 				bullets: [
-					'R&D and migration to microservices with TypeScript (Express, Mongo) and Rust. Maintenance of .NET & Angular systems with SQL databases.',
+					'R&D and migration to microservices with `TypeScript` (`Express`, `Mongo`) and `Rust`. Maintenance of `.NET` & `Angular` systems with `SQL` databases.',
 				],
 			},
 		],
@@ -121,12 +166,27 @@ export const cvData: Record<Locale, CvData> = {
 			{
 				institution: 'UADE',
 				description: 'Software Engineering',
-				period: 'March 2021 \u2013 Present',
+				period: 'Mar 2021 \u2013 Present',
 			},
 			{
 				institution: 'ORT Argentina',
 				description: 'HS Diploma, Computer Science',
-				period: 'March 2015 \u2013 December 2020',
+				period: 'Mar 2015 \u2013 Dec 2020',
+			},
+		],
+		projects: [
+			{
+				name: 'Nexata',
+				description:
+					'AI-powered enterprise knowledge platform. Unifies all your work tools into a single semantic search.',
+				url: 'https://nexata.app/home',
+				logo: '/nexata-logo.png',
+			},
+			{
+				name: 'HyprFollow',
+				description:
+					'JSON-based event monitors for Hyprland activity. Built with Rust via hyprland-rs IPC bindings.',
+				url: 'https://github.com/lukacerr/hyprfollow',
 			},
 		],
 	},
@@ -142,6 +202,7 @@ export const cvData: Record<Locale, CvData> = {
 			experience: 'Experiencia',
 			education: 'Educación',
 			knowledge: 'Conocimientos',
+			projects: 'Proyectos',
 		},
 		about:
 			'Estudiante de ingeniería en informática con experiencia en desarrollo full-stack. Apasionado por el software robusto y escalable, entusiasta de las "buenas prácticas". Usuario de Artix Linux para uso diario y trabajo.',
@@ -150,11 +211,34 @@ export const cvData: Record<Locale, CvData> = {
 		knowledgeMain: 'Principal',
 		knowledgeAmong: 'Entre otros',
 		darkModeLabel: 'Alternar modo oscuro',
+		pdfLabel: 'Descargar PDF',
+		repoLabel: 'Código fuente',
+		meetLabel: 'Agendar una reunión',
 		languages: [
-			{ name: 'Español', level: 'Nativo', variant: 'primary' },
-			{ name: 'Inglés', level: 'C1', variant: 'outline' },
-			{ name: 'Japonés', level: 'N4', variant: 'outline' },
-			{ name: 'Portugués', level: 'A1', variant: 'outline' },
+			{
+				name: 'Espa\u00f1ol',
+				level: 'Nativo',
+				flag: '\u{1F1E6}\u{1F1F7}',
+				proficiency: 100,
+			},
+			{
+				name: 'Ingl\u00e9s',
+				level: 'C1',
+				flag: '\u{1F1FA}\u{1F1F8}',
+				proficiency: 80,
+			},
+			{
+				name: 'Japon\u00e9s',
+				level: 'N4',
+				flag: '\u{1F1EF}\u{1F1F5}',
+				proficiency: 40,
+			},
+			{
+				name: 'Portugu\u00e9s',
+				level: 'A1',
+				flag: '\u{1F1E7}\u{1F1F7}',
+				proficiency: 20,
+			},
 		],
 		softSkills: [
 			{ label: 'Pensamiento', description: 'Crítico, soluciones' },
@@ -167,34 +251,38 @@ export const cvData: Record<Locale, CvData> = {
 		experience: [
 			{
 				company: 'Ernst & Young (EY)',
+				url: 'https://www.ey.com',
 				role: 'Ingeniero de IA',
-				period: 'Julio 2025 \u2013 Actualidad',
+				period: 'Jul 2025 \u2013 Actualidad',
+				current: true,
 				bullets: [
-					'IA agéntica en Python. Orquestación con FastAPI y Pydantic. Manipulación de Excel con Pandas, infraestructura en Azure y Blob Storage.',
+					'IA agéntica en `Python`. Orquestación con `FastAPI` y `Pydantic`. Manipulación de Excel con `Pandas`, infraestructura en `Azure` y `Blob Storage`.',
 				],
 			},
 			{
 				company: 'Un Aplauso',
-				role: 'CTO, Líder de Back e Infra',
-				period: 'Julio 2024 \u2013 Julio 2025',
+				role: 'Líder de Back e Infra',
+				period: 'Jul 2024 \u2013 Jul 2025',
 				bullets: [
-					'Microservicios en monorepo Nest.js, usando Redis. Base de datos PostgreSQL con DrizzleORM. Infraestructura AWS con AuroraDB y EC2 SUSE.',
+					'Microservicios en monorepo `Nest.js`, usando `Redis`. Base de datos `PostgreSQL` con `DrizzleORM`. Infraestructura `AWS` con `AuroraDB` y `EC2` SUSE.',
 				],
 			},
 			{
 				company: 'Losa0',
+				url: 'https://losa0.com',
 				role: 'Desarrollador Full-Stack',
-				period: 'Julio 2023 \u2013 Julio 2025',
+				period: 'Jul 2023 \u2013 Jul 2025',
 				bullets: [
-					'Desarrollo con Nest.js, usando TypeORM y PostgreSQL. Mantenimiento de EC2 e infraestructura con Ubuntu en AWS. Front-end web React.',
+					'Desarrollo con `Nest.js`, usando `TypeORM` y `PostgreSQL`. Mantenimiento de `EC2` e infraestructura con `Ubuntu` en `AWS`. Front-end web `React`.',
 				],
 			},
 			{
 				company: 'Wirsolut S.A.',
+				url: 'https://wirsolut.com',
 				role: 'Desarrollador Full-Stack',
-				period: 'Abril 2021 \u2013 Julio 2023',
+				period: 'Abr 2021 \u2013 Jul 2023',
 				bullets: [
-					'I+D y migración a microservicios con TypeScript (Express, Mongo) y Rust. Mantenimiento de sistemas .NET y Angular con bases de datos SQL.',
+					'I+D y migración a microservicios con `TypeScript` (`Express`, `Mongo`) y `Rust`. Mantenimiento de sistemas `.NET` y `Angular` con bases de datos `SQL`.',
 				],
 			},
 		],
@@ -202,12 +290,27 @@ export const cvData: Record<Locale, CvData> = {
 			{
 				institution: 'UADE',
 				description: 'Ingeniería en Informática',
-				period: 'Marzo 2021 \u2013 Actualidad',
+				period: 'Mar 2021 \u2013 Actualidad',
 			},
 			{
 				institution: 'ORT Argentina',
-				description: 'Bachiller en Informática',
-				period: 'Marzo 2015 \u2013 Diciembre 2020',
+				description: 'Bachiller en Inform\u00e1tica',
+				period: 'Mar 2015 \u2013 Dic 2020',
+			},
+		],
+		projects: [
+			{
+				name: 'Nexata',
+				description:
+					'Plataforma de conocimiento empresarial con IA. Unifica todas tus herramientas de trabajo en un \u00fanico buscador sem\u00e1ntico.',
+				url: 'https://nexata.app/home',
+				logo: '/nexata-logo.png',
+			},
+			{
+				name: 'HyprFollow',
+				description:
+					'Monitores de eventos JSON para la actividad de Hyprland. Construido en Rust con bindings IPC de hyprland-rs.',
+				url: 'https://github.com/lukacerr/hyprfollow',
 			},
 		],
 	},

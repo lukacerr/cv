@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@import "tailwindcss-intersect";
 @plugin "@tailwindcss/forms";
 @custom-variant dark (&:where(.dark, .dark *));
 
@@ -10,9 +11,9 @@
 	--card-foreground: var(--color-neutral-950);
 	--popover: var(--color-white);
 	--popover-foreground: var(--color-neutral-950);
-	--primary: var(--color-blue-700);
-	--primary-foreground: var(--color-neutral-50);
-	--primary-accent: var(--color-blue-700);
+	--primary: #c47fd5;
+	--primary-foreground: #1c1c1c;
+	--primary-accent: #c47fd5;
 	--secondary: var(--color-purple-700);
 	--secondary-foreground: var(--color-neutral-50);
 	--secondary-accent: var(--color-purple-700);
@@ -39,7 +40,7 @@
 	/* sidebar variables */
 	--sidebar-background: var(--color-neutral-50);
 	--sidebar-foreground: var(--color-neutral-950);
-	--sidebar-primary: var(--color-blue-700);
+	--sidebar-primary: #c47fd5;
 	--sidebar-primary-foreground: var(--color-neutral-50);
 	--sidebar-accent: var(--color-neutral-100);
 	--sidebar-accent-foreground: var(--color-neutral-900);
@@ -54,9 +55,9 @@
 	--card-foreground: var(--color-neutral-50);
 	--popover: var(--color-neutral-800);
 	--popover-foreground: var(--color-neutral-50);
-	--primary: var(--color-blue-700);
-	--primary-foreground: var(--color-neutral-50);
-	--primary-accent: var(--color-blue-400);
+	--primary: #c47fd5;
+	--primary-foreground: #1c1c1c;
+	--primary-accent: #d9a8e6;
 	--secondary: var(--color-purple-700);
 	--secondary-foreground: var(--color-neutral-50);
 	--secondary-accent: var(--color-purple-400);
@@ -79,7 +80,7 @@
 	/* sidebars variables */
 	--sidebar-background: var(--color-neutral-900);
 	--sidebar-foreground: var(--color-neutral-50);
-	--sidebar-primary: var(--color-blue-700);
+	--sidebar-primary: #c47fd5;
 	--sidebar-primary-foreground: var(--color-neutral-50);
 	--sidebar-accent: var(--color-neutral-800);
 	--sidebar-accent-foreground: var(--color-neutral-100);
