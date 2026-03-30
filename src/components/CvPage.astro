@@ -40,6 +40,24 @@ function getLogoMaskStyle(logo: ImageMetadata): string {
 		'-webkit-mask-size: contain',
 	].join('; ');
 }
+
+function renderKnowledgeIcon(
+	icon: Props['data']['knowledgeGroups'][number]['icon'],
+) {
+	if (icon === 'typescript') {
+		return `<svg class="size-4 text-primary-accent" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 17.5c.32 .32 .754 .5 1.207 .5h.543c.69 0 1.25 -.56 1.25 -1.25v-.25a1.5 1.5 0 0 0 -1.5 -1.5a1.5 1.5 0 0 1 -1.5 -1.5v-.25c0 -.69 .56 -1.25 1.25 -1.25h.543c.453 0 .887 .18 1.207 .5" /><path d="M9 12h4" /><path d="M11 12v6" /><path d="M21 19v-14a2 2 0 0 0 -2 -2h-14a2 2 0 0 0 -2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2 -2" /></svg>`;
+	}
+
+	if (icon === 'python') {
+		return `<svg class="size-4 text-primary-accent" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 9h-7a2 2 0 0 0 -2 2v4a2 2 0 0 0 2 2h3" /><path d="M12 15h7a2 2 0 0 0 2 -2v-4a2 2 0 0 0 -2 -2h-3" /><path d="M8 9v-4a2 2 0 0 1 2 -2h4a2 2 0 0 1 2 2v5a2 2 0 0 1 -2 2h-4a2 2 0 0 0 -2 2v5a2 2 0 0 0 2 2h4a2 2 0 0 0 2 -2v-4" /><path d="M11 6l0 .01" /><path d="M13 18l0 .01" /></svg>`;
+	}
+
+	if (icon === 'rust') {
+		return `<svg class="size-4 text-primary-accent" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10.139 3.463c.473 -1.95 3.249 -1.95 3.722 0a1.916 1.916 0 0 0 2.859 1.185c1.714 -1.045 3.678 .918 2.633 2.633a1.916 1.916 0 0 0 1.184 2.858c1.95 .473 1.95 3.249 0 3.722a1.916 1.916 0 0 0 -1.185 2.859c1.045 1.714 -.918 3.678 -2.633 2.633a1.916 1.916 0 0 0 -2.858 1.184c-.473 1.95 -3.249 1.95 -3.722 0a1.916 1.916 0 0 0 -2.859 -1.185c-1.714 1.045 -3.678 -.918 -2.633 -2.633a1.916 1.916 0 0 0 -1.184 -2.858c-1.95 -.473 -1.95 -3.249 0 -3.722a1.916 1.916 0 0 0 1.185 -2.859c-1.045 -1.714 .918 -3.678 2.633 -2.633a1.914 1.914 0 0 0 2.858 -1.184" /><path d="M8 12h6a2 2 0 1 0 0 -4h-6v8v-4" /><path d="M19 16h-2a2 2 0 0 1 -2 -2a2 2 0 0 0 -2 -2h-1" /><path d="M9 8h-4" /><path d="M5 16h4" /></svg>`;
+	}
+
+	return `<svg class="size-4 text-primary-accent" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 7a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v2a3 3 0 0 1 -3 3h-12a3 3 0 0 1 -3 -3v-2" /><path d="M12 20h-6a3 3 0 0 1 -3 -3v-2a3 3 0 0 1 3 -3h10.5" /><path d="M16 18a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M18 14.5v1.5" /><path d="M18 20v1.5" /><path d="M21.032 16.25l-1.299 .75" /><path d="M16.27 19l-1.3 .75" /><path d="M14.97 16.25l1.3 .75" /><path d="M19.733 19l1.3 .75" /><path d="M7 8v.01" /><path d="M7 16v.01" /></svg>`;
+}
 ---
 
 <div class="mx-auto max-w-5xl p-6 md:p-10 print:p-0">
@@ -309,34 +327,23 @@ function getLogoMaskStyle(logo: ImageMetadata): string {
 					<h2 class="font-heading text-xl font-semibold">{data.sections.knowledge}</h2>
 				</div>
 
-				<div class="space-y-4">
-					<div>
-						<h3 class="mb-2 text-sm font-medium text-muted-foreground">{data.knowledgeMain}</h3>
-						<div class="flex flex-wrap gap-2">
-							<Badge variant="primary" size="sm">Nest.js</Badge>
-							<Badge variant="primary" size="sm">React</Badge>
-							<Badge variant="primary" size="sm">Docker</Badge>
-							<Badge variant="primary" size="sm">Linux</Badge>
-							<Badge variant="primary" size="sm">SQL</Badge>
-							<Badge variant="primary" size="sm">LangChain</Badge>
-							<Badge variant="primary" size="sm">Cloud</Badge>
-							<Badge variant="primary" size="sm">Git</Badge>
+				<div class="grid grid-cols-1 gap-3 md:grid-cols-2">
+					{data.knowledgeGroups.map((group) => (
+						<div class="space-y-2 rounded-xl border border-border/70 bg-card/40 p-3.5">
+							<div class="flex items-center justify-between gap-2">
+								<div class="flex min-w-0 items-center gap-2">
+									<Fragment set:html={renderKnowledgeIcon(group.icon)} />
+									<h3 class="text-sm font-semibold text-foreground">{group.title}</h3>
+								</div>
+								<span class="shrink-0 text-[11px] text-muted-foreground">{group.summary}</span>
+							</div>
+							<div class="flex flex-wrap gap-1.5">
+								{group.badges.map((badge) => (
+									<Badge variant={badge.variant ?? 'outline'} size="sm">{badge.label}</Badge>
+								))}
+							</div>
 						</div>
-					</div>
-
-					<div>
-						<h3 class="mb-2 text-sm font-medium text-muted-foreground">{data.knowledgeAmong}</h3>
-						<div class="flex flex-wrap gap-2">
-							<Badge variant="outline" size="sm">Python (FastAPI, Seaborn)</Badge>
-							<Badge variant="outline" size="sm">Rust (Axum, Tauri, Tonic, CLI apps)</Badge>
-							<Badge variant="outline" size="sm">Shell scripting</Badge>
-							<Badge variant="outline" size="sm">React Native</Badge>
-							<Badge variant="outline" size="sm">gRPC services</Badge>
-							<Badge variant="outline" size="sm">Next.js</Badge>
-							<Badge variant="outline" size="sm">Zustand</Badge>
-							<Badge variant="outline" size="sm">shadcn</Badge>
-						</div>
-					</div>
+					))}
 				</div>
 		</section>
 

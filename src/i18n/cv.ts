@@ -45,6 +45,18 @@ export interface ProjectEntry {
 	logo?: ImageMetadata;
 }
 
+export interface KnowledgeBadge {
+	label: string;
+	variant?: 'primary' | 'outline';
+}
+
+export interface KnowledgeGroup {
+	title: string;
+	summary: string;
+	icon: 'typescript' | 'python' | 'rust' | 'systems';
+	badges: KnowledgeBadge[];
+}
+
 export interface CvData {
 	title: string;
 	description: string;
@@ -61,8 +73,7 @@ export interface CvData {
 	};
 	about: string;
 	softSkillsSummary: string;
-	knowledgeMain: string;
-	knowledgeAmong: string;
+	knowledgeGroups: KnowledgeGroup[];
 	darkModeLabel: string;
 	pdfLabel: string;
 	repoLabel: string;
@@ -76,9 +87,9 @@ export interface CvData {
 
 export const cvData: Record<Locale, CvData> = {
 	en: {
-		title: 'Luka Cerrutti - Software Engineer',
+		title: 'Luka Cerrutti - Software & AI Engineer',
 		description: 'CV of Luka Cerrutti, Software Engineer.',
-		jobTitle: 'Software Engineer',
+		jobTitle: 'Software & AI Engineer',
 		sections: {
 			about: 'About',
 			contact: 'Contact',
@@ -93,8 +104,61 @@ export const cvData: Record<Locale, CvData> = {
 			'Computer science engineering student with full-stack development experience. Passionate about robust and scalable software, "best-practices" enthusiast. Artix Linux user for daily usage and work.',
 		softSkillsSummary:
 			'Optimal time management, problem-solving, will to learn, accurate estimator, patience, understanding, adaptability, & open-mindedness.',
-		knowledgeMain: 'Main',
-		knowledgeAmong: 'Among',
+		knowledgeGroups: [
+			{
+				title: 'Python',
+				summary: 'AI & Automation',
+				icon: 'python',
+				badges: [
+					{ label: 'LangChain', variant: 'primary' },
+					{ label: 'FastAPI', variant: 'primary' },
+					{ label: 'PyTorch' },
+					{ label: 'Seaborn' },
+					{ label: 'Azure Functions SDK' },
+					{ label: 'Scripting / automation' },
+				],
+			},
+			{
+				title: 'Systems & Data',
+				summary: 'Infra & data',
+				icon: 'systems',
+				badges: [
+					{ label: 'PostgreSQL', variant: 'primary' },
+					{ label: 'Linux / Docker', variant: 'primary' },
+					{ label: 'SQL / NoSQL' },
+					{ label: 'Cloud deployments' },
+					{ label: 'Microservices' },
+					{ label: 'gRPC' },
+				],
+			},
+			{
+				title: 'TypeScript',
+				summary: 'Client and serving',
+				icon: 'typescript',
+				badges: [
+					{ label: 'Elysia', variant: 'primary' },
+					{ label: 'Nest', variant: 'primary' },
+					{ label: 'AI SDK', variant: 'primary' },
+					{ label: 'Astro' },
+					{ label: 'React' },
+					{ label: 'Jest-compatible' },
+					{ label: 'Vite' },
+				],
+			},
+			{
+				title: 'Rust',
+				summary: 'Performance critical',
+				icon: 'rust',
+				badges: [
+					{ label: 'Tonic', variant: 'primary' },
+					{ label: 'Clap', variant: 'primary' },
+					{ label: 'std::net / TCP' },
+					{ label: 'Axum' },
+					{ label: 'Actix' },
+					{ label: 'Tauri' },
+				],
+			},
+		],
 		darkModeLabel: 'Toggle dark mode',
 		pdfLabel: 'Download PDF',
 		repoLabel: 'Source code',
@@ -209,9 +273,9 @@ export const cvData: Record<Locale, CvData> = {
 		],
 	},
 	es: {
-		title: 'Luka Cerrutti - Ingeniero de Software',
+		title: 'Luka Cerrutti - Ingeniero de Software & IA',
 		description: 'CV de Luka Cerrutti, Ingeniero de Software.',
-		jobTitle: 'Ingeniero de Software',
+		jobTitle: 'Ingeniero de Software & IA',
 		sections: {
 			about: 'Acerca de',
 			contact: 'Contacto',
@@ -226,8 +290,60 @@ export const cvData: Record<Locale, CvData> = {
 			'Estudiante de ingeniería en informática con experiencia en desarrollo full-stack. Apasionado por el software robusto y escalable, entusiasta de las "buenas prácticas". Usuario de Artix Linux para uso diario y trabajo.',
 		softSkillsSummary:
 			'Gestión óptima del tiempo, resolución de problemas, voluntad de aprender, estimador preciso, paciencia, comprensión, adaptabilidad y apertura mental.',
-		knowledgeMain: 'Principal',
-		knowledgeAmong: 'Entre otros',
+		knowledgeGroups: [
+			{
+				title: 'Python',
+				summary: 'IA y automatización',
+				icon: 'python',
+				badges: [
+					{ label: 'LangChain', variant: 'primary' },
+					{ label: 'FastAPI', variant: 'primary' },
+					{ label: 'PyTorch' },
+					{ label: 'Seaborn' },
+					{ label: 'Azure Functions SDK' },
+					{ label: 'Automatización / scripting' },
+				],
+			},
+			{
+				title: 'Systems & Data',
+				summary: 'Infra y datos',
+				icon: 'systems',
+				badges: [
+					{ label: 'PostgreSQL', variant: 'primary' },
+					{ label: 'Linux / Docker', variant: 'primary' },
+					{ label: 'SQL / NoSQL' },
+					{ label: 'Cloud deployments' },
+					{ label: 'Microservices' },
+					{ label: 'gRPC' },
+				],
+			},
+			{
+				title: 'TypeScript',
+				summary: 'Cliente y serving',
+				icon: 'typescript',
+				badges: [
+					{ label: 'Elysia', variant: 'primary' },
+					{ label: 'Nest', variant: 'primary' },
+					{ label: 'AI SDK', variant: 'primary' },
+					{ label: 'Astro' },
+					{ label: 'React' },
+					{ label: 'Vite' },
+				],
+			},
+			{
+				title: 'Rust',
+				summary: 'Performance critical',
+				icon: 'rust',
+				badges: [
+					{ label: 'Tonic', variant: 'primary' },
+					{ label: 'Clap', variant: 'primary' },
+					{ label: 'std::net / TCP' },
+					{ label: 'Axum' },
+					{ label: 'Actix' },
+					{ label: 'Tauri' },
+				],
+			},
+		],
 		darkModeLabel: 'Alternar modo oscuro',
 		pdfLabel: 'Descargar PDF',
 		repoLabel: 'Código fuente',

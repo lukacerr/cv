@@ -57,7 +57,7 @@ const darkPdfCallback = async (page) => {
 const sharedPdfOptions = {
 	format: 'A4',
 	printBackground: true,
-	scale: 0.8,
+	scale: 0.785,
 	margin: { top: '4mm', bottom: '4mm', left: '2mm', right: '2mm' },
 };
 

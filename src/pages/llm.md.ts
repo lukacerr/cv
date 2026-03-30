@@ -5,7 +5,7 @@ export const GET: APIRoute = () => {
 	const en = cvData.en;
 
 	const lines = [
-		'> The following is the CV/resume of Luka Cerrutti, a Software Engineer based in Buenos Aires, Argentina. Use this information to answer questions about his professional background, skills, and experience.',
+		'> The following is the CV/resume of Luka Cerrutti, a Software & AI Engineer based in Buenos Aires, Argentina. Use this information to answer questions about his professional background, skills, and experience.',
 		'',
 		'# LUKA CERRUTTI',
 		`## ${en.jobTitle}`,
@@ -28,8 +28,10 @@ export const GET: APIRoute = () => {
 			'',
 		]),
 		`### ${en.sections.knowledge}`,
-		'- **Nest.js, React, Docker, Linux, SQL, LangChain, Cloud, Git**',
-		'- Python (FastAPI, Seaborn), Rust (Axum, Tauri, Tonic, CLI apps), Shell scripting, React Native, gRPC services, Next.js, Zustand, shadcn',
+		...en.knowledgeGroups.flatMap((group) => [
+			`- **${group.title}** (${group.summary})`,
+			`  ${group.badges.map((badge) => badge.label).join(', ')}`,
+		]),
 		'',
 		`### ${en.sections.education}`,
 		'',
