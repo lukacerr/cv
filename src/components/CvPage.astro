@@ -1,5 +1,5 @@
 ---
-import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
 import { Badge } from '@/components/starwind/badge';
 import {
 	Card,
@@ -26,6 +26,19 @@ function renderBullet(text: string): string {
 		/`([^`]+)`/g,
 		'<code class="rounded bg-muted px-1 py-0.5 text-xs font-medium text-foreground">$1</code>',
 	);
+}
+
+function getLogoMaskStyle(logo: ImageMetadata): string {
+	return [
+		`mask-image: url('${logo.src}')`,
+		`-webkit-mask-image: url('${logo.src}')`,
+		'mask-repeat: no-repeat',
+		'-webkit-mask-repeat: no-repeat',
+		'mask-position: center',
+		'-webkit-mask-position: center',
+		'mask-size: contain',
+		'-webkit-mask-size: contain',
+	].join('; ');
 }
 ---
 
@@ -248,7 +261,11 @@ function renderBullet(text: string): string {
 							<div class="flex items-start gap-3">
 								<div class="flex size-8 shrink-0 items-center justify-center rounded-md bg-muted">
 									{job.logo ? (
-										<Image src={job.logo} alt={job.company} width={24} height={24} class="size-6 rounded object-contain grayscale opacity-50" />
+										<span
+											aria-hidden="true"
+											class="block size-5 bg-muted-foreground"
+											style={getLogoMaskStyle(job.logo)}
+										/>
 									) : (
 										<svg class="size-4 text-muted-foreground" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 21l18 0" /><path d="M9 8l1 0" /><path d="M9 12l1 0" /><path d="M9 16l1 0" /><path d="M14 8l1 0" /><path d="M14 12l1 0" /><path d="M14 16l1 0" /><path d="M5 21v-16a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v16" /></svg>
 									)}
@@ -341,9 +358,15 @@ function renderBullet(text: string): string {
 						>
 							<svg class="absolute top-3 right-3 size-3.5 text-muted-foreground opacity-50 group-hover:opacity-100 transition-opacity" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6" /><path d="M11 13l9 -9" /><path d="M15 4h5v5" /></svg>
 							{project.logo ? (
-								<Image src={project.logo} alt={project.name} width={40} height={40} class="size-10 rounded-lg object-contain grayscale opacity-50" loading="lazy" />
+								<div class="flex h-14 w-20 items-center justify-center rounded-xl bg-background/80 ring-1 ring-border/60">
+									<span
+										aria-hidden="true"
+										class="block h-8 w-14 bg-muted-foreground"
+										style={getLogoMaskStyle(project.logo)}
+									/>
+								</div>
 							) : (
-								<div class="flex size-10 items-center justify-center rounded-lg bg-background">
+								<div class="flex h-14 w-20 items-center justify-center rounded-xl bg-background/80 ring-1 ring-border/60">
 									<svg class="size-5 text-muted-foreground" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 13a8 8 0 0 1 7 7a6 6 0 0 0 3 -5a9 9 0 0 0 6 -8a3 3 0 0 0 -3 -3a9 9 0 0 0 -8 6a6 6 0 0 0 -5 3" /><path d="M7 14a6 6 0 0 0 -3 6a6 6 0 0 0 6 -3" /><path d="M14 9a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /></svg>
 								</div>
 							)}

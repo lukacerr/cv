@@ -77,7 +77,7 @@ const basePdfPageOptions = {
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://luka.nexata.app',
+	site: 'https://luka.software',
 	trailingSlash: 'always',
 	i18n: {
 		locales: ['en', 'es'],

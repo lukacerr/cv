@@ -1,8 +1,8 @@
 import type { ImageMetadata } from 'astro';
-import eyLogo from '@/assets/logos/ey.png';
-import hyprfollowLogo from '@/assets/logos/hyprfollow.png';
+import eyLogo from '@/assets/logos/ey.svg';
+import hyprfollowLogo from '@/assets/logos/hyprfollow.svg';
 import losa0Logo from '@/assets/logos/losa0.svg';
-import nexataLogo from '@/assets/logos/nexata.png';
+import nexataLogo from '@/assets/logos/nexata.svg';
 import unaplausoLogo from '@/assets/logos/unaplauso.svg';
 import wirsolutLogo from '@/assets/logos/wirsolut.svg';
 import type { Locale } from './ui';
