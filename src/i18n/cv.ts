@@ -101,7 +101,7 @@ export const cvData: Record<Locale, CvData> = {
 			projects: 'Projects',
 		},
 		about:
-			'Computer science engineering student with full-stack development experience. Passionate about robust and scalable software, "best-practices" enthusiast. Artix Linux user for daily usage and work.',
+			'Computer science engineering student with full-stack development experience. Passionate about robust and scalable software, "best-practices" enthusiast. Artix Linux, Zed, and Opencode user, with contributions to Azure LangChain packages. Open-source software advocate.',
 		softSkillsSummary:
 			'Optimal time management, problem-solving, will to learn, accurate estimator, patience, understanding, adaptability, & open-mindedness.',
 		knowledgeGroups: [
@@ -115,6 +115,7 @@ export const cvData: Record<Locale, CvData> = {
 					{ label: 'PyTorch' },
 					{ label: 'Seaborn' },
 					{ label: 'Azure Functions SDK' },
+					{ label: 'pytest' },
 					{ label: 'Scripting / automation' },
 				],
 			},
@@ -129,6 +130,7 @@ export const cvData: Record<Locale, CvData> = {
 					{ label: 'Cloud deployments' },
 					{ label: 'Microservices' },
 					{ label: 'gRPC' },
+					{ label: 'Git' },
 				],
 			},
 			{
@@ -156,6 +158,7 @@ export const cvData: Record<Locale, CvData> = {
 					{ label: 'Axum' },
 					{ label: 'Actix' },
 					{ label: 'Tauri' },
+					{ label: 'tch-rs' },
 				],
 			},
 		],
@@ -206,33 +209,33 @@ export const cvData: Record<Locale, CvData> = {
 				period: 'Jul 2025 \u2013 Present',
 				current: true,
 				bullets: [
-					'Agentic AI in `Python`. Orchestration with `FastAPI` and `Pydantic`. Excel manipulation with `Pandas`, infrastructure on `Azure` and `Blob Storage`.',
+					'AI agents in `Python` with `LangChain`. APIs with `FastAPI` and `Pydantic`; Excel with `Pandas` and `Polars`, infrastructure on `Azure`. Unit testing with `pytest`.',
 				],
 			},
 			{
 				company: 'Un Aplauso',
 				logo: unaplausoLogo,
-				role: 'Back & Infra Lead',
+				role: 'Lead Backend & DevOps Engineer',
 				period: 'Jul 2024 \u2013 Jul 2025',
 				bullets: [
-					'Microservices in `Nest.js` monorepo, using `Redis`. `PostgreSQL` database with `DrizzleORM`. `AWS` infrastructure with `AuroraDB` and `EC2` SUSE.',
+					'`Nest.js` monorepo with `Redis`, `PostgreSQL` as database, `DrizzleORM`, and `AWS`; built NSFW model inference microservices with `gRPC`, using `Keras` in `Python`.',
 				],
 			},
 			{
 				company: 'Losa0',
 				url: 'https://losa0.com',
 				logo: losa0Logo,
-				role: 'Full-Stack Developer',
+				role: 'Full-Stack Engineer',
 				period: 'Jul 2023 \u2013 Jul 2025',
 				bullets: [
-					'Development with `Nest.js`, using `TypeORM` and `PostgreSQL`. Upkeeping `EC2` & infrastructure with `Ubuntu` in `AWS`. Front-end web `React`.',
+					'Maintained the `Nest.js` app with `TypeORM` and `PostgreSQL`. `AWS` infrastructure on `EC2` with `Ubuntu`, front-end in `React`; built `Python` services with `FastAPI`.',
 				],
 			},
 			{
 				company: 'Wirsolut S.A.',
 				url: 'https://wirsolut.com',
 				logo: wirsolutLogo,
-				role: 'Full-Stack Developer',
+				role: 'Full-Stack Engineer',
 				period: 'Apr 2021 \u2013 Jul 2023',
 				bullets: [
 					'R&D and migration to microservices with `TypeScript` (`Express`, `Mongo`) and `Rust`. Maintenance of `.NET` & `Angular` systems with `SQL` databases.',
@@ -259,14 +262,14 @@ export const cvData: Record<Locale, CvData> = {
 			{
 				name: 'Nexata',
 				description:
-					'AI-powered enterprise knowledge platform. Unifies all your work tools into a single semantic search.',
+					'AI-powered enterprise knowledge platform. Unifies all your work tools into a single semantic search experience.',
 				url: 'https://nexata.app/home',
 				logo: nexataLogo,
 			},
 			{
 				name: 'HyprFollow',
 				description:
-					'JSON-based event monitors for Hyprland activity. Built with Rust via hyprland-rs IPC bindings.',
+					'JSON-based event monitors for Hyprland activity. Built with Rust via hyprland-rs IPC bindings and tooling.',
 				url: 'https://github.com/lukacerr/hyprfollow',
 				logo: hyprfollowLogo,
 			},
@@ -287,7 +290,7 @@ export const cvData: Record<Locale, CvData> = {
 			projects: 'Proyectos',
 		},
 		about:
-			'Estudiante de ingeniería en informática con experiencia en desarrollo full-stack. Apasionado por el software robusto y escalable, entusiasta de las "buenas prácticas". Usuario de Artix Linux para uso diario y trabajo.',
+			'Estudiante de ingeniería en informática con experiencia en desarrollo full-stack. Apasionado por el software robusto y escalable, entusiasta de las "buenas prácticas". Usuario de Artix Linux, Zed y Opencode, con aportes a paquetes Azure de LangChain. Promotor del software OSS.',
 		softSkillsSummary:
 			'Gestión óptima del tiempo, resolución de problemas, voluntad de aprender, estimador preciso, paciencia, comprensión, adaptabilidad y apertura mental.',
 		knowledgeGroups: [
@@ -301,6 +304,7 @@ export const cvData: Record<Locale, CvData> = {
 					{ label: 'PyTorch' },
 					{ label: 'Seaborn' },
 					{ label: 'Azure Functions SDK' },
+					{ label: 'pytest' },
 					{ label: 'Automatización / scripting' },
 				],
 			},
@@ -315,6 +319,7 @@ export const cvData: Record<Locale, CvData> = {
 					{ label: 'Cloud deployments' },
 					{ label: 'Microservices' },
 					{ label: 'gRPC' },
+					{ label: 'Git' },
 				],
 			},
 			{
@@ -327,6 +332,7 @@ export const cvData: Record<Locale, CvData> = {
 					{ label: 'AI SDK', variant: 'primary' },
 					{ label: 'Astro' },
 					{ label: 'React' },
+					{ label: 'Jest-compatible' },
 					{ label: 'Vite' },
 				],
 			},
@@ -341,6 +347,7 @@ export const cvData: Record<Locale, CvData> = {
 					{ label: 'Axum' },
 					{ label: 'Actix' },
 					{ label: 'Tauri' },
+					{ label: 'tch-rs' },
 				],
 			},
 		],
@@ -391,33 +398,33 @@ export const cvData: Record<Locale, CvData> = {
 				period: 'Jul 2025 \u2013 Actualidad',
 				current: true,
 				bullets: [
-					'IA agéntica en `Python`. Orquestación con `FastAPI` y `Pydantic`. Manipulación de Excel con `Pandas`, infraestructura en `Azure` y `Blob Storage`.',
+					'Agentes de IA en `Python` con `LangChain`. APIs con `FastAPI` y `Pydantic`; Excel con `Pandas` y `Polars`, infraestructura en `Azure`. Testing unitario con `pytest`.',
 				],
 			},
 			{
 				company: 'Un Aplauso',
 				logo: unaplausoLogo,
-				role: 'Líder de Back e Infra',
+				role: 'Lead Engineer de Backend y DevOps',
 				period: 'Jul 2024 \u2013 Jul 2025',
 				bullets: [
-					'Microservicios en monorepo `Nest.js`, usando `Redis`. Base de datos `PostgreSQL` con `DrizzleORM`. Infraestructura `AWS` con `AuroraDB` y `EC2` SUSE.',
+					'Monorepo `Nest.js` con `Redis`, db `PostgreSQL`, `DrizzleORM` e infraestructura `AWS`; microservicios de inferencia NSFW con `gRPC`, usando `Keras` en `Python`.',
 				],
 			},
 			{
 				company: 'Losa0',
 				url: 'https://losa0.com',
 				logo: losa0Logo,
-				role: 'Desarrollador Full-Stack',
+				role: 'Ingeniero Full-Stack',
 				period: 'Jul 2023 \u2013 Jul 2025',
 				bullets: [
-					'Desarrollo con `Nest.js`, usando `TypeORM` y `PostgreSQL`. Mantenimiento de `EC2` e infraestructura con `Ubuntu` en `AWS`. Front-end web `React`.',
+					'Mantenimiento de la app `Nest.js` con `TypeORM` y `PostgreSQL`. Infraestructura `AWS` en `EC2` con `Ubuntu`, front-end en `React`; servicios `Python` con `FastAPI`.',
 				],
 			},
 			{
 				company: 'Wirsolut S.A.',
 				url: 'https://wirsolut.com',
 				logo: wirsolutLogo,
-				role: 'Desarrollador Full-Stack',
+				role: 'Ingeniero Full-Stack',
 				period: 'Abr 2021 \u2013 Jul 2023',
 				bullets: [
 					'I+D y migración a microservicios con `TypeScript` (`Express`, `Mongo`) y `Rust`. Mantenimiento de sistemas `.NET` y `Angular` con bases de datos `SQL`.',
