@@ -1,8 +1,8 @@
 import type { ImageMetadata } from 'astro';
 import eyLogo from '@/assets/logos/ey.svg';
-import hyprfollowLogo from '@/assets/logos/hyprfollow.svg';
 import losa0Logo from '@/assets/logos/losa0.svg';
 import nexataLogo from '@/assets/logos/nexata.svg';
+import tastewiseLogo from '@/assets/logos/tastewise.svg';
 import unaplausoLogo from '@/assets/logos/unaplauso.svg';
 import wirsolutLogo from '@/assets/logos/wirsolut.svg';
 import type { Locale } from './ui';
@@ -14,6 +14,8 @@ export interface ExperienceEntry {
 	period: string;
 	bullets: string[];
 	current?: boolean;
+	/** Consecutive compact entries render side by side in a two-column row. */
+	compact?: boolean;
 	logo?: ImageMetadata;
 }
 
@@ -42,6 +44,7 @@ export interface ProjectEntry {
 	name: string;
 	description: string;
 	url: string;
+	repo?: string;
 	logo?: ImageMetadata;
 }
 
@@ -53,7 +56,7 @@ export interface KnowledgeBadge {
 export interface KnowledgeGroup {
 	title: string;
 	summary: string;
-	icon: 'typescript' | 'python' | 'rust' | 'systems';
+	icon: 'ai' | 'automation' | 'fullstack' | 'systems';
 	badges: KnowledgeBadge[];
 }
 
@@ -106,59 +109,72 @@ export const cvData: Record<Locale, CvData> = {
 			'Optimal time management, problem-solving, will to learn, accurate estimator, patience, understanding, adaptability, & open-mindedness.',
 		knowledgeGroups: [
 			{
-				title: 'Python',
-				summary: 'AI & Automation',
-				icon: 'python',
+				title: 'AI & Agents',
+				summary: 'LLMs & tooling',
+				icon: 'ai',
 				badges: [
-					{ label: 'LangChain', variant: 'primary' },
-					{ label: 'FastAPI', variant: 'primary' },
+					{ label: 'AI SDK' },
+					{ label: 'LangChain' },
+					{ label: 'MCP' },
+					{ label: 'Claude' },
 					{ label: 'PyTorch' },
-					{ label: 'Seaborn' },
-					{ label: 'Azure Functions SDK' },
-					{ label: 'pytest' },
-					{ label: 'Scripting / automation' },
+					{ label: 'Python' },
+					{ label: 'Puppeteer' },
+					{ label: 'Keras' },
+					{ label: 'RAG' },
 				],
 			},
 			{
-				title: 'Systems & Data',
-				summary: 'Infra & data',
+				title: 'Automation',
+				summary: 'Workflows & APIs',
+				icon: 'automation',
+				badges: [
+					{ label: 'n8n' },
+					{ label: 'Routines' },
+					{ label: 'Salesforce' },
+					{ label: 'Gong' },
+					{ label: 'Mixpanel' },
+					{ label: 'Webhooks' },
+					{ label: 'Skills' },
+					{ label: 'Scripting' },
+					{ label: 'Excel / Pandas' },
+				],
+			},
+			{
+				title: 'Full-stack',
+				summary: 'Web apps & APIs',
+				icon: 'fullstack',
+				badges: [
+					{ label: 'TypeScript' },
+					{ label: 'Bun' },
+					{ label: 'Rust' },
+					{ label: 'Next.js' },
+					{ label: 'Nest' },
+					{ label: 'Elysia' },
+					{ label: 'FastAPI' },
+					{ label: 'React' },
+					{ label: 'Astro' },
+					{ label: 'Express' },
+					{ label: 'Drizzle' },
+					{ label: 'Tauri' },
+				],
+			},
+			{
+				title: 'Systems & Infra',
+				summary: 'Performance & cloud',
 				icon: 'systems',
 				badges: [
-					{ label: 'PostgreSQL', variant: 'primary' },
-					{ label: 'Linux / Docker', variant: 'primary' },
-					{ label: 'SQL / NoSQL' },
-					{ label: 'Cloud deployments' },
-					{ label: 'Microservices' },
+					{ label: 'AWS' },
+					{ label: 'Azure' },
+					{ label: 'GCP' },
+					{ label: 'Terraform' },
+					{ label: 'PostgreSQL' },
+					{ label: 'Docker' },
 					{ label: 'gRPC' },
-					{ label: 'Git' },
-				],
-			},
-			{
-				title: 'TypeScript',
-				summary: 'Client and serving',
-				icon: 'typescript',
-				badges: [
-					{ label: 'Elysia', variant: 'primary' },
-					{ label: 'Nest', variant: 'primary' },
-					{ label: 'AI SDK', variant: 'primary' },
-					{ label: 'Astro' },
-					{ label: 'React' },
-					{ label: 'Jest-compatible' },
-					{ label: 'Vite' },
-				],
-			},
-			{
-				title: 'Rust',
-				summary: 'Performance critical',
-				icon: 'rust',
-				badges: [
-					{ label: 'Tonic', variant: 'primary' },
-					{ label: 'Clap', variant: 'primary' },
-					{ label: 'std::net / TCP' },
-					{ label: 'Axum' },
-					{ label: 'Actix' },
-					{ label: 'Tauri' },
-					{ label: 'tch-rs' },
+					{ label: 'Scalr' },
+					{ label: 'Redis' },
+					{ label: 'Linux' },
+					{ label: 'MongoDB' },
 				],
 			},
 		],
@@ -202,12 +218,22 @@ export const cvData: Record<Locale, CvData> = {
 		],
 		experience: [
 			{
+				company: 'Tastewise',
+				url: 'https://tastewise.io',
+				logo: tastewiseLogo,
+				role: 'AI Engineer',
+				period: 'May 2026 \u2013 Dec 2026',
+				current: true,
+				bullets: [
+					'Revenue intelligence, automations with `n8n` and agents with `AI SDK`. Full-stack with `Bun` and `Next.js`, `AWS` with `Terraform` and `Scalr`. Integrations with `Gong`, `Salesforce` and `Mixpanel`. `Claude` routines, skills and custom `MCP` servers.',
+				],
+			},
+			{
 				company: 'Ernst & Young (EY)',
 				url: 'https://www.ey.com',
 				logo: eyLogo,
 				role: 'AI Engineer',
-				period: 'Jul 2025 \u2013 Present',
-				current: true,
+				period: 'Jul 2025 \u2013 May 2026',
 				bullets: [
 					'AI agents in `Python` with `LangChain`. APIs with `FastAPI` and `Pydantic`; Excel with `Pandas` and `Polars`, infrastructure on `Azure`. Unit testing with `pytest`.',
 				],
@@ -227,18 +253,20 @@ export const cvData: Record<Locale, CvData> = {
 				logo: losa0Logo,
 				role: 'Full-Stack Engineer',
 				period: 'Jul 2023 \u2013 Jul 2025',
+				compact: true,
 				bullets: [
-					'Maintained the `Nest.js` app with `TypeORM` and `PostgreSQL`. `AWS` infrastructure on `EC2` with `Ubuntu`, front-end in `React`; built `Python` services with `FastAPI`.',
+					'`Nest.js` app with `TypeORM` and `PostgreSQL` on `AWS`; `React` front-end and `FastAPI` services.',
 				],
 			},
 			{
-				company: 'Wirsolut S.A.',
+				company: 'Wirsolut',
 				url: 'https://wirsolut.com',
 				logo: wirsolutLogo,
 				role: 'Full-Stack Engineer',
 				period: 'Apr 2021 \u2013 Jul 2023',
+				compact: true,
 				bullets: [
-					'R&D and migration to microservices with `TypeScript` (`Express`, `Mongo`) and `Rust`. Maintenance of `.NET` & `Angular` systems with `SQL` databases.',
+					'Microservices migration with `TypeScript` and `Rust`; `.NET` and `Angular` maintenance.',
 				],
 			},
 		],
@@ -264,14 +292,8 @@ export const cvData: Record<Locale, CvData> = {
 				description:
 					'AI-powered enterprise knowledge platform. Unifies all your work tools into a single semantic search experience.',
 				url: 'https://nexata.app/home',
+				repo: 'https://github.com/Nexata/main',
 				logo: nexataLogo,
-			},
-			{
-				name: 'HyprFollow',
-				description:
-					'JSON-based event monitors for Hyprland activity. Built with Rust via hyprland-rs IPC bindings and tooling.',
-				url: 'https://github.com/lukacerr/hyprfollow',
-				logo: hyprfollowLogo,
 			},
 		],
 	},
@@ -295,59 +317,72 @@ export const cvData: Record<Locale, CvData> = {
 			'Gestión óptima del tiempo, resolución de problemas, voluntad de aprender, estimador preciso, paciencia, comprensión, adaptabilidad y apertura mental.',
 		knowledgeGroups: [
 			{
-				title: 'Python',
-				summary: 'IA y automatización',
-				icon: 'python',
+				title: 'IA y agentes',
+				summary: 'LLMs y tooling',
+				icon: 'ai',
 				badges: [
-					{ label: 'LangChain', variant: 'primary' },
-					{ label: 'FastAPI', variant: 'primary' },
+					{ label: 'AI SDK' },
+					{ label: 'LangChain' },
+					{ label: 'MCP' },
+					{ label: 'Claude' },
 					{ label: 'PyTorch' },
-					{ label: 'Seaborn' },
-					{ label: 'Azure Functions SDK' },
-					{ label: 'pytest' },
-					{ label: 'Automatización / scripting' },
+					{ label: 'Python' },
+					{ label: 'Puppeteer' },
+					{ label: 'Keras' },
+					{ label: 'RAG' },
 				],
 			},
 			{
-				title: 'Systems & Data',
-				summary: 'Infra y datos',
+				title: 'Automatización',
+				summary: 'Workflows y APIs',
+				icon: 'automation',
+				badges: [
+					{ label: 'n8n' },
+					{ label: 'Routines' },
+					{ label: 'Salesforce' },
+					{ label: 'Gong' },
+					{ label: 'Mixpanel' },
+					{ label: 'Webhooks' },
+					{ label: 'Skills' },
+					{ label: 'Scripting' },
+					{ label: 'Excel / Pandas' },
+				],
+			},
+			{
+				title: 'Full-stack',
+				summary: 'Apps web y APIs',
+				icon: 'fullstack',
+				badges: [
+					{ label: 'TypeScript' },
+					{ label: 'Bun' },
+					{ label: 'Rust' },
+					{ label: 'Next.js' },
+					{ label: 'Nest' },
+					{ label: 'Elysia' },
+					{ label: 'FastAPI' },
+					{ label: 'React' },
+					{ label: 'Astro' },
+					{ label: 'Express' },
+					{ label: 'Drizzle' },
+					{ label: 'Tauri' },
+				],
+			},
+			{
+				title: 'Sistemas e infra',
+				summary: 'Performance y cloud',
 				icon: 'systems',
 				badges: [
-					{ label: 'PostgreSQL', variant: 'primary' },
-					{ label: 'Linux / Docker', variant: 'primary' },
-					{ label: 'SQL / NoSQL' },
-					{ label: 'Cloud deployments' },
-					{ label: 'Microservices' },
+					{ label: 'AWS' },
+					{ label: 'Azure' },
+					{ label: 'GCP' },
+					{ label: 'Terraform' },
+					{ label: 'PostgreSQL' },
+					{ label: 'Docker' },
 					{ label: 'gRPC' },
-					{ label: 'Git' },
-				],
-			},
-			{
-				title: 'TypeScript',
-				summary: 'Cliente y serving',
-				icon: 'typescript',
-				badges: [
-					{ label: 'Elysia', variant: 'primary' },
-					{ label: 'Nest', variant: 'primary' },
-					{ label: 'AI SDK', variant: 'primary' },
-					{ label: 'Astro' },
-					{ label: 'React' },
-					{ label: 'Jest-compatible' },
-					{ label: 'Vite' },
-				],
-			},
-			{
-				title: 'Rust',
-				summary: 'Performance critical',
-				icon: 'rust',
-				badges: [
-					{ label: 'Tonic', variant: 'primary' },
-					{ label: 'Clap', variant: 'primary' },
-					{ label: 'std::net / TCP' },
-					{ label: 'Axum' },
-					{ label: 'Actix' },
-					{ label: 'Tauri' },
-					{ label: 'tch-rs' },
+					{ label: 'Scalr' },
+					{ label: 'Redis' },
+					{ label: 'Linux' },
+					{ label: 'MongoDB' },
 				],
 			},
 		],
@@ -391,12 +426,22 @@ export const cvData: Record<Locale, CvData> = {
 		],
 		experience: [
 			{
+				company: 'Tastewise',
+				url: 'https://tastewise.io',
+				logo: tastewiseLogo,
+				role: 'Ingeniero de IA',
+				period: 'May 2026 \u2013 Dic 2026',
+				current: true,
+				bullets: [
+					'Revenue intelligence, automatizaciones con `n8n` y agents con `AI SDK`. Full-stack con `Bun` y `Next.js`, `AWS` con `Terraform` y `Scalr`. Integraciones con `Gong`, `Salesforce` y `Mixpanel`. Routines, skills y servidores `MCP` custom para `Claude`.',
+				],
+			},
+			{
 				company: 'Ernst & Young (EY)',
 				url: 'https://www.ey.com',
 				logo: eyLogo,
 				role: 'Ingeniero de IA',
-				period: 'Jul 2025 \u2013 Actualidad',
-				current: true,
+				period: 'Jul 2025 \u2013 May 2026',
 				bullets: [
 					'Agentes de IA en `Python` con `LangChain`. APIs con `FastAPI` y `Pydantic`; Excel con `Pandas` y `Polars`, infraestructura en `Azure`. Testing unitario con `pytest`.',
 				],
@@ -416,18 +461,20 @@ export const cvData: Record<Locale, CvData> = {
 				logo: losa0Logo,
 				role: 'Ingeniero Full-Stack',
 				period: 'Jul 2023 \u2013 Jul 2025',
+				compact: true,
 				bullets: [
-					'Mantenimiento de la app `Nest.js` con `TypeORM` y `PostgreSQL`. Infraestructura `AWS` en `EC2` con `Ubuntu`, front-end en `React`; servicios `Python` con `FastAPI`.',
+					'App `Nest.js` con `TypeORM` y `PostgreSQL` en `AWS`; front-end en `React` y servicios `FastAPI`.',
 				],
 			},
 			{
-				company: 'Wirsolut S.A.',
+				company: 'Wirsolut',
 				url: 'https://wirsolut.com',
 				logo: wirsolutLogo,
 				role: 'Ingeniero Full-Stack',
 				period: 'Abr 2021 \u2013 Jul 2023',
+				compact: true,
 				bullets: [
-					'I+D y migración a microservicios con `TypeScript` (`Express`, `Mongo`) y `Rust`. Mantenimiento de sistemas `.NET` y `Angular` con bases de datos `SQL`.',
+					'Migración a microservicios con `TypeScript` y `Rust`; mantenimiento de `.NET` y `Angular`.',
 				],
 			},
 		],
@@ -453,14 +500,8 @@ export const cvData: Record<Locale, CvData> = {
 				description:
 					'Plataforma de conocimiento empresarial con IA. Unifica todas tus herramientas de trabajo en un \u00fanico buscador sem\u00e1ntico.',
 				url: 'https://nexata.app/home',
+				repo: 'https://github.com/Nexata/main',
 				logo: nexataLogo,
-			},
-			{
-				name: 'HyprFollow',
-				description:
-					'Monitores de eventos JSON para la actividad de Hyprland. Construido en Rust con bindings IPC de hyprland-rs.',
-				url: 'https://github.com/lukacerr/hyprfollow',
-				logo: hyprfollowLogo,
 			},
 		],
 	},
