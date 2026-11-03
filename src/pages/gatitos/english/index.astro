@@ -1,0 +1,15 @@
+---
+import GatitosPage from '@/components/GatitosPage.astro';
+import { gatitosData } from '@/i18n/gatitos';
+import Layout from '@/layouts/Layout.astro';
+---
+
+<Layout
+	title={gatitosData.en.title}
+	description={gatitosData.en.description}
+	lang="en"
+	ogImage={{ src: '/gatitos/og.jpg', width: 1200, height: 630 }}
+	standalone
+>
+	<GatitosPage data={gatitosData.en} lang="en" />
+</Layout>
