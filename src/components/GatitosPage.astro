@@ -65,27 +65,6 @@ const iconAttrs = {
 };
 ---
 
-{/* Browser language detection: first visit of the session to /gatitos/ only */}
-<script is:inline define:vars={{ esPath: gatitosPaths.es, enPath: gatitosPaths.en }}>
-	try {
-		var key = 'gatitos-locale-checked';
-		if (!sessionStorage.getItem(key)) {
-			sessionStorage.setItem(key, 'true');
-			if (window.location.pathname === esPath) {
-				var browserLangs = navigator.languages || [navigator.language];
-				for (var i = 0; i < browserLangs.length; i++) {
-					var code = (browserLangs[i] || '').split('-')[0].toLowerCase();
-					if (code === 'es') break;
-					if (code === 'en') {
-						window.location.replace(enPath);
-						break;
-					}
-				}
-			}
-		}
-	} catch (e) {}
-</script>
-
 <div class="mx-auto max-w-5xl px-4 py-6 md:px-6 md:py-10">
 	{/* Toolbar: rescue Instagram (left) · language + theme (right) */}
 	<div class="flex items-center justify-between gap-3">
